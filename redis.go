@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-redis/redis/internal"
-	"github.com/go-redis/redis/internal/pool"
-	"github.com/go-redis/redis/internal/proto"
+	"ireul.com/redis/internal"
+	"ireul.com/redis/internal/pool"
+	"ireul.com/redis/internal/proto"
 )
 
 // Redis nil reply returned when key does not exist.
@@ -284,7 +284,7 @@ func (c *baseClient) txPipelineReadQueued(cn *pool.Conn, cmds []Cmder) error {
 		return err
 	}
 
-	for _ = range cmds {
+	for range cmds {
 		err := statusCmd.readReply(cn)
 		if err != nil && !internal.IsRedisError(err) {
 			return err
